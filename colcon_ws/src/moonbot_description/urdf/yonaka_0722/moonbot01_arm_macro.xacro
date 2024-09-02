@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="moonbot01_arm" params="prefix">
+
+    <!-- include files -->
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/constant.xacro" />
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/common.xacro" />
+    <!-- <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/common_gazebo.xacro" /> -->
+  
+    <!-- base link -->
+    <link name="${prefix}arm_base_link">
+      <inertial>
+        <mass value="0.001"/>
+        <inertia ixx="0.000000" ixy="0.000000" ixz="0.000000" iyy="0.000000" iyz="0.000000" izz="0.000000"/>
+      </inertial>
+    </link>
+
+    <!-- joint 1 -->
+    <joint name="${prefix}arm_joint1" type="revolute">
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <xacro:if value="${prefix == 'right_'}">
+        <limit effort="1000.0" lower="${-aj1_upper_limit}" upper="${-aj1_lower_limit}" velocity="${-aj1_velocity_limit}"/>
+      </xacro:if>
+      <xacro:if value="${prefix == 'left_'}">
+        <limit effort="1000.0" lower="${aj1_lower_limit}" upper="${aj1_upper_limit}" velocity="${aj1_velocity_limit}"/>
+      </xacro:if>
+      <origin xyz="0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_base_link"/>
+      <child link="${prefix}arm_link1"/>
+    </joint>
+
+    
+    <!-- link 1 -->
+    <xacro:link name="${prefix}arm_link1" material="White" mesh="M_Assy_arm1.STL" mass="3.550" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1"/>
+
+    
+    <!-- joint 2 -->
+    <joint name="${prefix}arm_joint2" type="revolute">
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${aj2_lower_limit}" upper="${aj2_upper_limit}" velocity="${aj2_velocity_limit}"/>
+      <origin xyz="0.09 0.0 -0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link1"/>
+      <child link="${prefix}arm_link2"/>
+    </joint>
+
+    <!-- link 2 -->
+    <xacro:link name="${prefix}arm_link2" material="White" mesh="M_Assy_arm2.STL" mass="0.990" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1"/>
+
+    <!-- joint 3 -->
+    <joint name="${prefix}arm_joint3" type="revolute">
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${aj3_lower_limit}" upper="${aj3_upper_limit}" velocity="${aj3_velocity_limit}"/>
+      <origin xyz="0.0 0.0 0.28" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link2"/>
+      <child link="${prefix}arm_link3"/>
+    </joint>
+
+    <!-- link 3 -->
+    <xacro:link name="${prefix}arm_link3" material="White" mesh="M_Assy_arm3.STL" mass="0.43" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1"/>
+
+
+    <!-- joint 4 -->
+    <joint name="${prefix}arm_joint4" type="revolute">
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${aj4_lower_limit}" upper="${aj4_upper_limit}" velocity="${aj4_velocity_limit}"/>
+      <origin xyz="0.0 0.0 0.33" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link3"/>
+      <child link="${prefix}arm_link4"/>
+    </joint>
+
+    <!-- link 4 -->
+    <xacro:if value="${prefix == 'left_'}">
+      <xacro:link name="${prefix}arm_link4" material="White" mesh="HAND_L1.STL" mass="0.6" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1"/>
+    </xacro:if>
+    <xacro:if value="${prefix == 'right_'}">
+      <xacro:link name="${prefix}arm_link4" material="White" mesh="HAND_R1.STL" mass="0.6" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1"/>
+    </xacro:if>
+
+    <!-- joint 5 -->
+    <joint name="${prefix}arm_joint5" type="revolute">
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${aj5_lower_limit}" upper="${aj5_upper_limit}" velocity="${aj5_velocity_limit}"/>
+      <origin xyz="0.0 0.0 0.165" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link4"/>
+      <child link="${prefix}arm_link5"/>
+    </joint>
+
+    <!-- link 5 -->
+    <xacro:if value="${prefix == 'left_'}">
+      <xacro:link name="${prefix}arm_link5" material="White" mesh="HAND_L2.STL" mass="0.08" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+    </xacro:if>
+    <xacro:if value="${prefix == 'right_'}">
+      <xacro:link name="${prefix}arm_link5" material="White" mesh="HAND_R2.STL" mass="0.08" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+    </xacro:if>
+
+    <!-- joint 6 -->
+    <joint name="${prefix}arm_joint6" type="revolute">
+      <axis xyz="1 0 0" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${aj6_lower_limit}" upper="${aj6_upper_limit}" velocity="${aj6_velocity_limit}"/>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link5"/>
+      <child link="${prefix}arm_link6"/>
+    </joint>
+
+    <!-- link 6 -->
+    <xacro:if value="${prefix == 'left_'}">
+      <xacro:link name="${prefix}arm_link6" material="White" mesh="HAND_L3.STL" mass="0.08" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+    </xacro:if>
+    <xacro:if value="${prefix == 'right_'}">
+      <xacro:link name="${prefix}arm_link6" material="White" mesh="HAND_R3.STL" mass="0.08" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+    </xacro:if>
+
+    <!-- finger link -->
+    <!-- <xacro:if value="${prefix == 'left_'}">
+      <xacro:link name="${prefix}finger_link1" material="White" mesh="HAND_L4.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link2" material="White" mesh="HAND_L5.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link3" material="White" mesh="HAND_L6.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link4" material="White" mesh="HAND_L7.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link5" material="White" mesh="HAND_L8.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+    </xacro:if>
+    <xacro:if value="${prefix == 'right_'}">
+      <xacro:link name="${prefix}finger_link1" material="White" mesh="HAND_R4.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link2" material="White" mesh="HAND_R5.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link3" material="White" mesh="HAND_R6.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link4" material="White" mesh="HAND_R7.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+      <xacro:link name="${prefix}finger_link5" material="White" mesh="HAND_R8.STL" mass="0.01" ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" xyz='0 0 -0.165'/>
+    </xacro:if> -->
+
+    <!-- finger joint -->
+    <!-- <joint name="${prefix}finger_joint1" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link6"/>
+      <child link="${prefix}finger_link1"/>
+    </joint> -->
+ 
+    <!-- <joint name="${prefix}finger_joint2" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link6"/>
+      <child link="${prefix}finger_link2"/>
+    </joint> -->
+
+    <!-- <joint name="${prefix}finger_joint3" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link6"/>
+      <child link="${prefix}finger_link3"/>
+    </joint> -->
+
+    <!-- <joint name="${prefix}finger_joint4" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link6"/>
+      <child link="${prefix}finger_link4"/>
+    </joint> -->
+
+    <!-- <joint name="${prefix}finger_joint5" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link6"/>
+      <child link="${prefix}finger_link5"/>
+    </joint>  -->
+
+    <!-- <xacro:transmission joint="${prefix}arm_joint1"/>
+    <xacro:transmission joint="${prefix}arm_joint2"/>
+    <xacro:transmission joint="${prefix}arm_joint3"/>
+    <xacro:transmission joint="${prefix}arm_joint4"/> -->
+
+  </xacro:macro>
+
+</robot>

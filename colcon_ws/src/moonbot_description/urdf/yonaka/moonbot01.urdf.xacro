@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- include files -->
+  <xacro:include filename="$(find moonbot_description)/urdf/yonaka/materials.xacro"/>
+  <xacro:include filename="$(find moonbot_description)/urdf/yonaka/moonbot01_macro.xacro"/>
+  <xacro:include filename="$(find moonbot_description)/urdf/yonaka/common_gazebo.xacro"/>
+
+  <xacro:moonbot01/>
+
+</robot>

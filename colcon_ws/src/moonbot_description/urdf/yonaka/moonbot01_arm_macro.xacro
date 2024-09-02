@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="moonbot01_arm" params="prefix">
+
+    <!-- include files -->
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka/common.xacro" />
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka/common_gazebo.xacro" />
+  
+    <!-- joint limits [rad] -->
+    <xacro:property name="j1_lower_limit" value="${radians( -360)}"/>
+    <xacro:property name="j1_upper_limit" value="${radians(  360)}"/>
+    <xacro:property name="j2_lower_limit" value="${radians(-360)}"/>
+    <xacro:property name="j2_upper_limit" value="${radians( 360)}"/>
+    <xacro:property name="j3_lower_limit" value="${radians(-360)}"/>
+    <xacro:property name="j3_upper_limit" value="${radians( 360)}"/>
+
+    <!-- joint verocity limits [rad/s] -->
+    <xacro:property name="j1_velocity_limit" value="${radians(30)}"/>
+    <xacro:property name="j2_velocity_limit" value="${radians(30)}"/>
+    <xacro:property name="j3_velocity_limit" value="${radians(30)}"/>
+
+    <!-- base link -->
+    <link name="${prefix}arm_base_link">
+      <inertial>
+        <mass value="0.001"/>
+        <inertia ixx="0.000000" ixy="0.000000" ixz="0.000000" iyy="0.000000" iyz="0.000000" izz="0.000000"/>
+      </inertial>
+    </link>
+
+    <!-- joint 1 -->
+    <joint name="${prefix}arm_joint1" type="revolute">
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${j1_lower_limit}" upper="${j1_upper_limit}" velocity="${j1_velocity_limit}"/>
+      <origin xyz="0 0 0.07" rpy="0 0 0"/>
+      <parent link="${prefix}arm_base_link"/>
+      <child link="${prefix}arm_link1"/>
+    </joint>
+    <!-- link 1 -->
+    <xacro:link name="${prefix}arm_link1" material="White" mesh="F_L_CROTCH_Y_LINK.STL" mass="0.215675" ixx="0.000785" ixy="0.000000" ixz="0.000000" iyy="0.000419" iyz="0.000005" izz="0.000700"/>
+
+    
+    <!-- joint 2 -->
+    <joint name="${prefix}arm_joint2" type="revolute">
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${j2_lower_limit}" upper="${j2_upper_limit}" velocity="${j2_velocity_limit}"/>
+      <xacro:if value="${prefix == 'right_'}">
+        <origin xyz="0.0 -0.05 -0.0" rpy="0 0 0"/>
+      </xacro:if>
+      <xacro:if value="${prefix == 'left_'}">
+        <origin xyz="0.0 0.05 -0.0" rpy="0 0 0"/>
+      </xacro:if>
+      <parent link="${prefix}arm_link1"/>
+      <child link="${prefix}arm_link2"/>
+    </joint>
+
+    <!-- link 2 -->
+    <xacro:link name="${prefix}arm_link2" material="White" mesh="F_L_CROTCH_P_LINK.STL" mass="0.318353" ixx="0.007936" ixy="0.000000" ixz="0.000000" iyy="0.007995" iyz="-0.000167" izz="0.000285"/>
+
+    <!-- joint 3 -->
+    <joint name="${prefix}arm_joint3" type="revolute">
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+      <limit effort="1000.0" lower="${j3_lower_limit}" upper="${j3_upper_limit}" velocity="${j3_velocity_limit}"/>
+      <origin xyz="0.0 0 -0.30" rpy="0 0 0"/>
+      <parent link="${prefix}arm_link2"/>
+      <child link="${prefix}arm_link3"/>
+    </joint>
+
+    <!-- link 3 -->
+    <xacro:link name="${prefix}arm_link3" material="White" mesh="F_L_KNEE_P_LINK.STL" mass="0.086899" ixx="0.000118" ixy="0.000000" ixz="0.000000" iyy="0.000127" iyz="0.000006" izz="0.000079"/>
+
+
+    <!-- <xacro:transmission joint="${prefix}arm_joint1"/>
+    <xacro:transmission joint="${prefix}arm_joint2"/>
+    <xacro:transmission joint="${prefix}arm_joint3"/> -->
+
+  </xacro:macro>
+
+</robot>

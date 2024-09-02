@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="moonbot01">
+
+    <!-- include files -->
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka/common.xacro" />
+    <!-- <xacro:include filename="$(find moonbot_description)/urdf/yonaka/common_gazebo.xacro" /> -->
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka/ros2_control.xacro" />
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka/moonbot01_arm_macro.xacro" />
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka/moonbot01_leg_macro.xacro" />
+
+    <!-- base link -->
+    <link name="base_link"/>
+
+    <!-- body joint -->
+    <joint name="lift_to_body" type="fixed">
+      <origin xyz="0 0 0.73883" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="body_link"/>
+    </joint>
+    <!-- body link -->
+    <xacro:link name="body_link" material="White" mesh="BODY.STL" mass="1.491600" ixx="0.021826" ixy="0.000074" ixz="0.002275" iyy="0.011612" iyz="-0.000022" izz="0.018192"/>
+
+
+    <!-- left arm joint -->
+    <joint name="base_to_left_arm_base" type="fixed">
+      <origin xyz="0.0 0.2 0.15" rpy="0 3.1416 0"/>
+      <parent link="body_link"/>
+      <child link="left_arm_base_link"/>
+    </joint>
+    <!-- left arm -->
+    <xacro:moonbot01_arm prefix="left_"/>
+
+    <!-- right arm joint -->
+    <joint name="base_to_right_arm_base" type="fixed">
+      <origin xyz="0.0 -0.2 0.15" rpy="0 3.1416 0"/>
+      <parent link="body_link"/>
+      <child link="right_arm_base_link"/>
+    </joint>
+    <!-- right arm -->
+    <xacro:moonbot01_arm prefix="right_"/>
+    
+    
+    <!-- forward left leg joint -->
+    <joint name="base_to_f_left_leg_base" type="fixed">
+      <origin xyz="0.2 0.13 -0.07" rpy="0 0 0"/>
+      <parent link="body_link"/>
+      <child link="f_left_leg_base_link"/>
+    </joint>
+    <!-- forward left leg -->
+    <xacro:moonbot01_leg prefix="f_left_"/>
+
+    <!-- forward right leg joint -->
+    <joint name="base_to_f_right_leg_base" type="fixed">
+      <origin xyz="0.2 -0.13 -0.07" rpy="0 0 0"/>
+      <parent link="body_link"/>
+      <child link="f_right_leg_base_link"/>
+    </joint>
+    <!-- forward right leg -->
+    <xacro:moonbot01_leg prefix="f_right_"/>
+
+    <!-- back left leg joint -->
+    <joint name="base_to_b_left_leg_base" type="fixed">
+      <origin xyz="-0.2 0.13 -0.07" rpy="0 0 0"/>
+      <parent link="body_link"/>
+      <child link="b_left_leg_base_link"/>
+    </joint>
+    <!-- back left leg -->
+    <xacro:moonbot01_leg prefix="b_left_"/>
+
+    <!-- back right leg joint -->
+    <joint name="base_to_b_right_leg_base" type="fixed">
+      <origin xyz="-0.2 -0.13 -0.07" rpy="0 0 0"/>
+      <parent link="body_link"/>
+      <child link="b_right_leg_base_link"/>
+    </joint>
+    <!-- back right leg -->
+    <xacro:moonbot01_leg prefix="b_right_"/>
+
+
+  </xacro:macro>
+
+</robot>

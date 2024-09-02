@@ -1,0 +1,12 @@
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- link rviz colors -->
+  <material name="White">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="Black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+</robot>

@@ -1,0 +1,1452 @@
+<?xml version="1.0" ?>
+<robot name="MoonbotX" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+
+  <material name="White">
+      <color rgba="0.85 0.85 0.85 1" />
+  </material>
+  <material name="Black">
+      <color rgba="0.2 0.2 0.2 1" />
+  </material>
+
+  <link name="base_link">
+  </link>
+
+  <gazebo>
+    <plugin name="gazebo_ros_p3d" filename="libgazebo_ros_p3d.so">
+      <robotNamespace>/MoonbotX</robotNamespace>
+      <bodyName>base_link</bodyName>
+      <frameName>world</frameName>
+      <updateRate>50.0</updateRate>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+
+  <joint name="moonbot_attachment" type="fixed">
+    <parent link="base_link"/>
+    <child link="BODY"/>
+    <origin rpy="-1.5708 0 0" xyz="0 0 0"/>
+  </joint>
+  
+  <link name="BODY">
+    <inertial>
+      <origin
+        xyz="0.0099766 -0.00010893 0.00095216"
+        rpy="0 0 0" />
+      <mass
+        value="2.574" />
+      <inertia
+        ixx="9.116E-03"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.01716"
+        iyz="0.0"
+        izz="9.116E-03" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/BODY.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/BODY.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="c1_rf">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.31" />
+      <inertia
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+      <material name="White" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="thigh_rf">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="tibia_rf">
+    <inertial>
+      <origin
+        xyz="-0.01 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.12" />
+      <inertia
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <link name="EE_rf">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.02" />
+      <inertia
+        ixx="2.25E-06" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="1.365E-06"
+        iyz="0.0"
+        izz="1.365E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <material name="White">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="j_c1_rf" type="revolute">
+    <origin
+      xyz="0.13373 -0.00062261 0.12471"
+      rpy="1.5708 -0.7854 0" />
+    <parent
+      link="BODY" />
+    <child
+      link="c1_rf" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>  
+
+  <joint name="j_thigh_rf" type="revolute">
+    <origin
+      xyz="0.06455 -0.0003771 -0.0006271"
+      rpy="1.5708 0 0" />
+    <parent
+      link="c1_rf" />
+    <child
+      link="thigh_rf" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+  
+  <joint name="j_tibia_rf" type="revolute">
+    <origin
+      xyz="0.129 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_rf" />
+    <child
+      link="tibia_rf" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_EE_rf" type="fixed">
+    <origin
+      xyz="0.150 0 0"
+      rpy="0 0 0" />
+    <parent link="tibia_rf" />
+    <child link="EE_rf" />
+  </joint>
+
+
+  <link name="c1_lf">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.31" />
+      <inertia
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+      <material name="White" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="thigh_lf">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="tibia_lf">
+    <inertial>
+      <origin
+        xyz="-0.01 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.12" />
+      <inertia
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <link name="EE_lf">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.02" />
+      <inertia
+        ixx="2.25E-06" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="1.365E-06"
+        iyz="0.0"
+        izz="1.365E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <material name="White">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="j_c1_lf" type="revolute">
+    <origin
+      xyz="-0.1138 -0.00062261 0.12471"
+      rpy="-1.5708 -0.7854 3.1416" />
+    <parent
+      link="BODY" />
+    <child
+      link="c1_lf" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_thigh_lf" type="revolute">
+    <origin
+      xyz="0.06455 -0.0008771 -0.0006271"
+      rpy="1.5708 0 0" />
+    <parent
+      link="c1_lf" />
+    <child
+      link="thigh_lf" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_tibia_lf" type="revolute">
+    <origin
+      xyz="0.129 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_lf" />
+    <child
+      link="tibia_lf" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint> 
+
+  <joint name="j_EE_lf" type="fixed">
+    <origin
+      xyz="0.150 0 0"
+      rpy="0 0 0" />
+    <parent link="tibia_lf" />
+    <child link="EE_lf" />
+  </joint>
+
+
+  <link name="c1_lr">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.31" />
+      <inertia
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+      <material name="White" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="thigh_lr">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="tibia_lr">
+    <inertial>
+      <origin
+        xyz="-0.01 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.12" />
+      <inertia
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <link name="EE_lr">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.02" />
+      <inertia
+        ixx="2.25E-06" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="1.365E-06"
+        iyz="0.0"
+        izz="1.365E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <material name="White">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="j_c1_lr" type="revolute">
+    <origin
+      xyz="-0.11380255065902 -0.000622612263592514 -0.122826956051948"
+      rpy="-1.57079632679487 0.785398163397452 -3.14159265358979" />
+    <parent
+      link="BODY" />
+    <child
+      link="c1_lr" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_thigh_lr" type="revolute">
+    <origin
+      xyz="0.06455 0.0008771 -0.0006271"
+      rpy="1.5708 0 0" />
+    <parent
+      link="c1_lr" />
+    <child
+      link="thigh_lr" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+  
+  <joint name="j_tibia_lr" type="revolute">
+    <origin
+      xyz="0.129 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_lr" />
+    <child
+      link="tibia_lr" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_EE_lr" type="fixed">
+    <origin
+      xyz="0.150 0 0"
+      rpy="0 0 0" />
+    <parent link="tibia_lr" />
+    <child link="EE_lr" />
+  </joint>
+
+
+  <link name="c1_rr">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.31" />
+      <inertia
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+      <material name="White" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/COXA.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="thigh_rr">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/THIGH.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="tibia_rr">
+    <inertial>
+      <origin
+        xyz="-0.01 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.12" />
+      <inertia
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <material name="Black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://moonbot_description/meshesX/TIBIA.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <link name="EE_rr">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.02" />
+      <inertia
+        ixx="2.25E-06" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="1.365E-06"
+        iyz="0.0"
+        izz="1.365E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <material name="White">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.57 0" />
+      <geometry>
+        <cylinder length="0.012" radius="0.015"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
+    </collision>
+  </link> 
+
+  <joint name="j_c1_rr" type="revolute">
+    <origin
+      xyz="0.13373 -0.00062261 -0.12283"
+      rpy="1.5708 0.7854 0" />
+    <parent
+      link="BODY" />
+    <child
+      link="c1_rr" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_thigh_rr" type="revolute">
+    <origin
+      xyz="0.06455 0.0008771 -0.0006271"
+      rpy="1.5708 0 0" />
+    <parent
+      link="c1_rr" />
+    <child
+      link="thigh_rr" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint>
+
+  <joint name="j_tibia_rr" type="revolute">
+    <origin
+      xyz="0.129 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_rr" />
+    <child
+      link="tibia_rr" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="2"
+      velocity="5" />
+  </joint> 
+
+  <joint name="j_EE_rr" type="fixed">
+    <origin
+      xyz="0.150 0 0"
+      rpy="0 0 0" />
+    <parent link="tibia_rr" />
+    <child link="EE_rr" />
+  </joint> 
+
+  <gazebo reference="BODY">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="c1_rf">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="thigh_rf">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="tibia_rf">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="EE_rf">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+  <gazebo reference="c1_lf">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="thigh_lf">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="tibia_lf">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="EE_lf">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+  <gazebo reference="c1_lr">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="thigh_lr">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="tibia_lr">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="EE_lr">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+  <gazebo reference="c1_rr">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="thigh_rr">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="tibia_rr">
+    <material>Gazebo/DarkGrey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="EE_rr">
+    <material>Gazebo/White</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>111</mu1>
+    <mu2>111</mu2>
+    <fdir1>1 1 0</fdir1>
+    <maxVel>0.0</maxVel>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+  <gazebo reference="EE_rf">
+    <sensor name="EE_rf_bumper_sensor" type="contact">
+      <always_on>true</always_on>
+      <update_rate>50</update_rate>
+      <contact>
+        <collision>tibia_rf_fixed_joint_lump__EE_rf_collision_1</collision>
+      </contact>
+      <plugin name="EE_rf_bumper" filename="libgazebo_ros_bumper.so">
+        <ros>
+          <namespace>EE_rf</namespace>
+        </ros>
+        <frame_name>EE_rf</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="EE_lf">
+    <sensor name="EE_lf_bumper_sensor" type="contact">
+      <always_on>true</always_on>
+      <update_rate>50</update_rate>
+      <contact>
+        <collision>tibia_lf_fixed_joint_lump__EE_lf_collision_1</collision>
+      </contact>
+      <plugin name="EE_lf_bumper" filename="libgazebo_ros_bumper.so">
+        <ros>
+          <namespace>EE_lf</namespace>
+        </ros>
+        <frame_name>EE_lf</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="EE_lr">
+    <sensor name="EE_lr_bumper_sensor" type="contact">
+      <always_on>true</always_on>
+      <update_rate>50</update_rate>
+      <contact>
+        <collision>tibia_lr_fixed_joint_lump__EE_lr_collision_1</collision>
+      </contact>
+      <plugin name="EE_lr_bumper" filename="libgazebo_ros_bumper.so">
+        <ros>
+          <namespace>EE_lr</namespace>
+        </ros>
+        <frame_name>EE_lr</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="EE_rr">
+    <sensor name="EE_rr_bumper_sensor" type="contact">
+      <always_on>true</always_on>
+      <update_rate>50</update_rate>
+      <contact>
+        <collision>tibia_rr_fixed_joint_lump__EE_rr_collision_1</collision>
+      </contact>
+      <plugin name="EE_rr_bumper" filename="libgazebo_ros_bumper.so">
+        <ros>
+          <namespace>EE_rr</namespace>
+        </ros>
+        <frame_name>EE_rr</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+
+
+
+  <ros2_control name="MyRobotSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    
+    <joint name="j_c1_rf">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_thigh_rf">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_tibia_rf">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_c1_lf">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_thigh_lf">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_tibia_lf">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_c1_lr">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_thigh_lr">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_tibia_lr">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_c1_rr">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_thigh_rr">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="j_tibia_rr">
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+  </ros2_control>
+
+  <!-- Gazebo's ros2_control plugin  -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher_node</robot_param_node>
+      <parameters>$(find moonbot_control)/config/moonbot_config.yaml</parameters>
+    </plugin>
+  </gazebo> 
+
+</robot>

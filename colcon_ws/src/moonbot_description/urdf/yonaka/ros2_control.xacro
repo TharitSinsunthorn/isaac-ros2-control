@@ -1,0 +1,79 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Declare constants -->
+    <xacro:property name="j1_lower_limit" value="${radians( -360)}"/>
+    <xacro:property name="j1_upper_limit" value="${radians( 360)}"/>
+    <xacro:property name="j2_lower_limit" value="${radians( -360)}"/>
+    <xacro:property name="j2_upper_limit" value="${radians( 360)}"/>
+    <xacro:property name="j3_lower_limit" value="${radians( -360)}"/>
+    <xacro:property name="j3_upper_limit" value="${radians( 360)}"/>
+    <xacro:property name="j1_velocity_limit" value="${radians(30)}"/>
+    <xacro:property name="j2_velocity_limit" value="${radians(30)}"/>
+    <xacro:property name="j3_velocity_limit" value="${radians(30)}"/>
+    <xacro:property name="torque_min" value="-1000.0"/>
+    <xacro:property name="torque_max" value="1000.0"/>
+
+    <!-- Define a macro for the joint configuration -->
+    <xacro:macro name="joint_config" params="joint_name lower_limit upper_limit velocity_limit torque_min torque_max">
+        <joint name="${joint_name}">
+            <command_interface name="position">
+                <param name="min">${lower_limit}</param>
+                <param name="max">${upper_limit}</param>
+            </command_interface>
+            <command_interface name="velocity">
+                <param name="min">-${velocity_limit}</param>
+                <param name="max">${velocity_limit}</param>
+            </command_interface>
+            <command_interface name="effort">
+                <param name="min">${torque_min}</param>
+                <param name="max">${torque_max}</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+    </xacro:macro>
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <!-- Use the macro for all joints -->
+        <xacro:joint_config joint_name="left_arm_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="left_arm_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="left_arm_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+
+        <xacro:joint_config joint_name="right_arm_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="right_arm_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="right_arm_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+
+        <xacro:joint_config joint_name="f_left_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="f_left_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="f_left_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+
+        <xacro:joint_config joint_name="f_right_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="f_right_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="f_right_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+
+        <xacro:joint_config joint_name="b_left_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="b_left_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="b_left_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+
+        <xacro:joint_config joint_name="b_right_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="b_right_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+        <xacro:joint_config joint_name="b_right_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}"/>
+
+    </ros2_control>
+
+    <!-- Gazebo's ros2_control plugin  -->
+    <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher_node</robot_param_node>
+            <parameters>$(find moonbot_description)/config/jtc01.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+</robot>
