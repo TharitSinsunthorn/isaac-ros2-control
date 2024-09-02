@@ -1,0 +1,83 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/constant.xacro" />
+
+    <!-- Define a macro for the joint configuration -->
+    <xacro:macro name="joint_config" params="joint_name lower_limit upper_limit velocity_limit torque_min:=${torque_min} torque_max:=${torque_max} init_pose:=${PI}">
+        <joint name="${joint_name}">
+            <command_interface name="position">
+                <param name="min">${lower_limit}</param>
+                <param name="max">${upper_limit}</param>
+            </command_interface>
+            <command_interface name="velocity">
+                <param name="min">-${velocity_limit}</param>
+                <param name="max">${velocity_limit}</param>
+            </command_interface>
+            <command_interface name="effort">
+                <param name="min">${torque_min}</param>
+                <param name="max">${torque_max}</param>
+            </command_interface>
+            <state_interface name="position">  <!-- Set initial joint position -->
+                <param name="initial_value">${init_pose}</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+    </xacro:macro>
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <!-- Use the macro for all joints -->
+        <!-- Left arm -->
+        <xacro:joint_config joint_name="left_arm_joint1" lower_limit="${aj1_lower_limit}" upper_limit="${aj1_upper_limit}" velocity_limit="${aj1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj1_init_pose}"/>
+        <xacro:joint_config joint_name="left_arm_joint2" lower_limit="${aj2_lower_limit}" upper_limit="${aj2_upper_limit}" velocity_limit="${aj2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj2_init_pose}"/>
+        <xacro:joint_config joint_name="left_arm_joint3" lower_limit="${aj3_lower_limit}" upper_limit="${aj3_upper_limit}" velocity_limit="${aj3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj3_init_pose}"/>
+        <xacro:joint_config joint_name="left_arm_joint4" lower_limit="${aj4_lower_limit}" upper_limit="${aj4_upper_limit}" velocity_limit="${aj4_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj4_init_pose}"/>
+        <xacro:joint_config joint_name="left_arm_joint5" lower_limit="${aj5_lower_limit}" upper_limit="${aj5_upper_limit}" velocity_limit="${aj5_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj5_init_pose}"/>
+        <xacro:joint_config joint_name="left_arm_joint6" lower_limit="${aj6_lower_limit}" upper_limit="${aj6_upper_limit}" velocity_limit="${aj6_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj6_init_pose}"/>
+
+        <!-- Right arm -->
+        <xacro:joint_config joint_name="right_arm_joint1" lower_limit="${aj1_lower_limit}" upper_limit="${aj1_upper_limit}" velocity_limit="${aj1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="-${aj1_init_pose}"/>
+        <xacro:joint_config joint_name="right_arm_joint2" lower_limit="${aj2_lower_limit}" upper_limit="${aj2_upper_limit}" velocity_limit="${aj2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj2_init_pose}"/>
+        <xacro:joint_config joint_name="right_arm_joint3" lower_limit="${aj3_lower_limit}" upper_limit="${aj3_upper_limit}" velocity_limit="${aj3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj3_init_pose}"/>
+        <xacro:joint_config joint_name="right_arm_joint4" lower_limit="${aj4_lower_limit}" upper_limit="${aj4_upper_limit}" velocity_limit="${aj4_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj4_init_pose}"/>
+        <xacro:joint_config joint_name="right_arm_joint5" lower_limit="${aj5_lower_limit}" upper_limit="${aj5_upper_limit}" velocity_limit="${aj5_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj5_init_pose}"/>
+        <xacro:joint_config joint_name="right_arm_joint6" lower_limit="${aj6_lower_limit}" upper_limit="${aj6_upper_limit}" velocity_limit="${aj6_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${aj6_init_pose}"/>
+
+
+        <!-- Front left leg -->
+        <xacro:joint_config joint_name="f_left_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j1_init_pose}"/>
+        <xacro:joint_config joint_name="f_left_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j2_init_pose}"/>
+        <xacro:joint_config joint_name="f_left_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j3_init_pose}"/>
+
+        <!-- Front right leg -->
+        <xacro:joint_config joint_name="f_right_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j1_init_pose}"/>
+        <xacro:joint_config joint_name="f_right_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j2_init_pose}"/>
+        <xacro:joint_config joint_name="f_right_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j3_init_pose}"/>
+
+        <!-- Back left leg -->
+        <xacro:joint_config joint_name="b_left_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j1_init_pose}"/>
+        <xacro:joint_config joint_name="b_left_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j2_init_pose}"/>
+        <xacro:joint_config joint_name="b_left_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j3_init_pose}"/>
+
+        <!-- Back right leg -->
+        <xacro:joint_config joint_name="b_right_leg_joint1" lower_limit="${j1_lower_limit}" upper_limit="${j1_upper_limit}" velocity_limit="${j1_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j1_init_pose}"/>
+        <xacro:joint_config joint_name="b_right_leg_joint2" lower_limit="${j2_lower_limit}" upper_limit="${j2_upper_limit}" velocity_limit="${j2_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j2_init_pose}"/>
+        <xacro:joint_config joint_name="b_right_leg_joint3" lower_limit="${j3_lower_limit}" upper_limit="${j3_upper_limit}" velocity_limit="${j3_velocity_limit}" torque_min="${torque_min}" torque_max="${torque_max}" init_pose="${j3_init_pose}"/>
+
+    </ros2_control>
+
+    <!-- Gazebo's ros2_control plugin  -->
+    <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher_node</robot_param_node>
+            <parameters>$(find moonbot_description)/config/jtc01.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+</robot>

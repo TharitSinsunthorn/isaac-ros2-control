@@ -1,0 +1,53 @@
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/constant.xacro" />
+
+  <xacro:macro name="leg_gazebo_parameters" params="leg_name">
+      <gazebo reference="${leg_name}">
+          <mu1>111</mu1>
+          <mu2>111</mu2>
+          <fdir1>1 1 0</fdir1>
+          <self_collide>1</self_collide>
+          <kp value="1000000.0"/>
+          <kd value="1.0"/>
+      </gazebo>
+  </xacro:macro>
+
+  <!-- FL leg -->
+  <xacro:leg_gazebo_parameters leg_name="f_left_leg_link3"/>
+  <!-- FR leg -->
+  <xacro:leg_gazebo_parameters leg_name="f_right_leg_link3"/>
+  <!-- RL leg -->
+  <xacro:leg_gazebo_parameters leg_name="b_left_leg_link3"/>
+  <!-- RR leg -->
+  <xacro:leg_gazebo_parameters leg_name="b_right_leg_link3"/>
+
+  <gazebo>
+    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+      <ros>
+        <namespace>p3d</namespace>
+      </ros>
+      <frame_name>world</frame_name>
+      <body_name>base_link</body_name>
+      <topicName>/base_odometry</topicName>
+      <updateRate>1000.0</updateRate>
+      <gaussian_noise>0.01</gaussian_noise>
+    </plugin>
+  </gazebo>
+
+
+  <xacro:macro name="transmission" params="joint">
+
+    <transmission name="${joint}_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint}_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+
+</robot>

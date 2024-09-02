@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- include files -->
+  <xacro:include filename="$(find moonbot_description)/urdf/yonaka/materials.xacro"/>
+  <xacro:include filename="$(find moonbot_description)/urdf/yonaka/moonbot01_leg_macro.xacro"/>
+
+  <link name="world"/>
+
+  <joint name="world_to_f_left_base" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="f_left_leg_base_link"/>
+  </joint>
+
+  <xacro:moonbot01_leg prefix="f_left_"/>
+
+  <joint name="world_to_f_right_base" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="f_right_leg_base_link"/>
+  </joint>
+
+  <xacro:moonbot01_leg prefix="f_right_"/>
+
+  
+  <joint name="world_to_b_left_base" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="b_left_leg_base_link"/>
+  </joint>
+
+  <xacro:moonbot01_leg prefix="b_left_"/>
+
+  <joint name="world_to_b_right_base" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="b_right_leg_base_link"/>
+  </joint>
+
+  <xacro:moonbot01_leg prefix="b_right_"/>
+
+</robot>

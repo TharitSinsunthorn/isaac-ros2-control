@@ -1,0 +1,26 @@
+<robot name="moonbot01" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="link" params="name material mesh mass ixx ixy ixz iyy iyz izz xyz:='0 0 0' rpy:='0 0 0'">
+    <link name="${name}">
+      <visual>
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+        <material name="${material}"/>
+        <geometry>
+          <mesh filename="package://moonbot_description/meshesY/${mesh}" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+        <geometry>
+          <mesh filename="package://moonbot_description/meshesY/${mesh}" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+        <mass value="${mass}"/>
+        <inertia ixx="${ixx}" ixy="${ixy}" ixz="${ixz}" iyy="${iyy}" iyz="${iyz}" izz="${izz}"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+</robot>
