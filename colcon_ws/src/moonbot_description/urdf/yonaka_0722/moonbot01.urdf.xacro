@@ -4,7 +4,7 @@
   <!-- include files -->
   <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/materials.xacro"/>
   <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/moonbot01_macro.xacro"/>
-  <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/common_gazebo.xacro"/>
+  <!-- <xacro:include filename="$(find moonbot_description)/urdf/yonaka_0722/common_gazebo.xacro"/> -->
 
   <xacro:moonbot01/>
 
