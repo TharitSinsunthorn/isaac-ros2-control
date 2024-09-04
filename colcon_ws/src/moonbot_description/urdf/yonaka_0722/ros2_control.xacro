@@ -9,14 +9,6 @@
                 <param name="min">${lower_limit}</param>
                 <param name="max">${upper_limit}</param>
             </command_interface>
-            <command_interface name="velocity">
-                <param name="min">-${velocity_limit}</param>
-                <param name="max">${velocity_limit}</param>
-            </command_interface>
-            <command_interface name="effort">
-                <param name="min">${torque_min}</param>
-                <param name="max">${torque_max}</param>
-            </command_interface>
             <state_interface name="position">  <!-- Set initial joint position -->
                 <param name="initial_value">${init_pose}</param>
             </state_interface>
@@ -25,9 +17,14 @@
         </joint>
     </xacro:macro>
 
-    <ros2_control name="GazeboSystem" type="system">
+    <ros2_control name="IsaacSystem" type="system">
         <hardware>
-            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+            <param name="joint_commands_topic">/IsaacSystem/joint_command</param>
+            <param name="joint_states_topic">/IsaacSystem/joint_states</param>
+            <param name="sum_wrapped_joint_states">False</param>
+            <param name="use_initial_states_as_initial_commands">false</param>
+            <param name="wait_for_reaching_initial_values">true</param>
         </hardware>
 
         <!-- Use the macro for all joints -->
@@ -71,13 +68,13 @@
     </ros2_control>
 
     <!-- Gazebo's ros2_control plugin  -->
-    <gazebo>
+    <!-- <gazebo>
         <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
             <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher_node</robot_param_node>
             <parameters>$(find moonbot_description)/config/jtc01.yaml</parameters>
         </plugin>
-    </gazebo>
+    </gazebo> -->
 
 </robot>
