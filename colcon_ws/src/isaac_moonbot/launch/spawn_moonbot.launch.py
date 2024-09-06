@@ -35,7 +35,7 @@ def generate_launch_description():
     relative_urdf_path = urdf_path
 
     # params = {'robot_description': robot_desc}
-    params = {'robot_description': doc.toxml(), 'use_sim_time': True}
+    params = {'robot_description': doc.toxml(), 'use_sim_time': False}
 
     robot_controllers = PathJoinSubstitution(
         [
@@ -114,7 +114,7 @@ def generate_launch_description():
         parameters=[{'urdf_path': str(relative_urdf_path),
                     'x' : 0.0,
                     'y' : 0.0,
-                    'z' : 0.6,
+                    'z' : 1.0,
                     'R' : 0.0,
                     'P' : 0.0,
                     'Y' : 0.0,
