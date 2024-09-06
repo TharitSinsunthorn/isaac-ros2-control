@@ -27,10 +27,10 @@ def generate_launch_description():
     # xacroをロード
     doc = xacro.process_file(xacro_file)
     # # xacroを展開してURDFを生成
-    # robot_desc = doc.toprettyxml(indent='  ')
-    # f = open(urdf_path, 'w')
-    # f.write(robot_desc)
-    # f.close()
+    robot_desc = doc.toprettyxml(indent='  ')
+    f = open(urdf_path, 'w')
+    f.write(robot_desc)
+    f.close()
     # # relative_urdf_path = pathlib.Path(urdf_path).relative_to(os.getcwd())
     relative_urdf_path = urdf_path
 
