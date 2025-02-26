@@ -101,3 +101,22 @@ You can make URDF for Isaac Sim with [this documentation](https://hijimasa.githu
 ## Bug
 - LaserScan topic do not published when 2D Lidar config file is used.
 - You should uncheck "Normarize Image" in your depth topic in RViz2 if you get black depth image.
+
+## Joint comand line publisher
+ros2 topic pub /IsaacSystem/joint_command sensor_msgs/msg/JointState "{
+  header: {
+    stamp: {sec: 0, nanosec: 0},
+    frame_id: ''
+  },
+  name: [
+    'b_left_leg_joint1', 'b_right_leg_joint1', 'f_left_leg_joint1', 'f_right_leg_joint1',
+    'left_arm_joint1', 'right_arm_joint1', 'b_left_leg_joint2', 'b_right_leg_joint2',
+    'f_left_leg_joint2', 'f_right_leg_joint2', 'left_arm_joint2', 'right_arm_joint2',
+    'b_left_leg_joint3', 'b_right_leg_joint3', 'f_left_leg_joint3', 'f_right_leg_joint3',
+    'left_arm_joint3', 'right_arm_joint3', 'left_arm_joint4', 'right_arm_joint4',
+    'left_arm_joint5', 'right_arm_joint5', 'left_arm_joint6', 'right_arm_joint6'
+  ],
+  position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+  velocity: [],
+  effort: []
+}"

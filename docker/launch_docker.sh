@@ -2,6 +2,8 @@
 xhost +local:
 
 docker run --name isaac-sim --entrypoint bash -it --gpus all -e "ACCEPT_EULA=Y" --rm --network=host --privileged \
+    -e ROS_DOMAIN_ID=2 \
+    -v /dev/shm:/dev/shm \
     -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache/Kit:rw \
     -v ~/docker/isaac-sim/cache/ov:/root/.cache/ov:rw \
     -v ~/docker/isaac-sim/cache/pip:/root/.cache/pip:rw \
